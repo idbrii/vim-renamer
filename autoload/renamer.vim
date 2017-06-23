@@ -580,14 +580,6 @@ function renamer#PerformRename(isTest) "{{{1
             let uniqueIntermediateName = b:renamerDirectory.'/'.i.'_GOING_TO_'.newName
             if rename(b:renamerOriginalPathfileList[i], uniqueIntermediateName) != 0
               call s:EchoErr("Unable to rename '".b:renamerOriginalPathfileList[i]."' to '".uniqueIntermediateName."'")
-            " Continue anyway with the other files since we've already started renaming
-          else
-            " To allow moving files to other directories, slashes must be "escaped" in a special way
-            let newName = substitute(newName, '\/', '_FORWSLASH_', 'g')
-            let newName = substitute(newName, '\\', '_BACKSLASH_', 'g')
-            let uniqueIntermediateName = b:renamerDirectory.'/'.i.'_GOING_TO_'.newName
-            if rename(b:renamerOriginalPathfileList[i], uniqueIntermediateName) != 0
-              call s:EchoErr("Unable to rename '".b:renamerOriginalPathfileList[i]."' to '".uniqueIntermediateName."'")
               " Continue anyway with the other files since we've already started renaming
             else
               let uniqueIntermediateNames += [ uniqueIntermediateName ]
